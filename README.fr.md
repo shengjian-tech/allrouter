@@ -2,7 +2,7 @@
 
 ![new-api](/web/public/logo.png)
 
-# New API
+# All Router
 
 🍥 **Passerelle de modèles étendus de nouvelle génération et système de gestion d'actifs d'IA**
 
@@ -110,8 +110,8 @@
 
 ```bash
 # Cloner le projet
-git clone https://github.com/QuantumNous/new-api.git
-cd new-api
+git clone https://github.com/shengjian-tech/allrouter.git
+cd allrouter
 
 # Modifier la configuration docker-compose.yml
 nano docker-compose.yml
@@ -288,11 +288,6 @@ docker run --name new-api -d --restart always \
 
 ---
 
-## 🚢 Déploiement
-
-> [!TIP]
-> **Dernière image Docker:** `calciumion/new-api:latest`
-
 ### 📋 Exigences de déploiement
 
 | Composant | Exigence |
@@ -336,7 +331,7 @@ docker run --name new-api -d --restart always \
 
 ```bash
 # Cloner le projet
-git clone https://github.com/QuantumNous/new-api.git
+git clone https://github.com/shengjian-tech/allrouter.git
 cd new-api
 
 # Modifier la configuration
@@ -411,6 +406,7 @@ docker run --name new-api -d --restart always \
 |------|------|
 | [One API](https://github.com/songquanpeng/one-api) | Base du projet original |
 | [Midjourney-Proxy](https://github.com/novicezk/midjourney-proxy) | Prise en charge de l'interface Midjourney |
+| [New API](https://github.com/QuantumNous/new-api) | Base du projet original |
 
 ### Outils d'accompagnement
 
@@ -451,21 +447,9 @@ Il s'agit d'un projet open-source développé sur la base de [One API](https://g
 
 Si les politiques de votre organisation ne permettent pas l'utilisation de logiciels sous licence AGPLv3, ou si vous souhaitez éviter les obligations open-source de l'AGPLv3, veuillez nous contacter à : [support@quantumnous.com](mailto:support@quantumnous.com)
 
----
-
-## 🌟 Historique des étoiles
-
 <div align="center">
 
-[![Graphique de l'historique des étoiles](https://api.star-history.com/svg?repos=Calcium-Ion/new-api&type=Date)](https://star-history.com/#Calcium-Ion/new-api&Date)
-
-</div>
-
----
-
-<div align="center">
-
-### 💖 Merci d'utiliser New API
+### 💖 Merci d'utiliser All Router
 
 Si ce projet vous est utile, bienvenue à nous donner une ⭐️ Étoile！
 

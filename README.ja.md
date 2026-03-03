@@ -2,7 +2,7 @@
 
 ![new-api](/web/public/logo.png)
 
-# New API
+# All Router
 
 🍥 **次世代大規模モデルゲートウェイとAI資産管理システム**
 
@@ -110,8 +110,8 @@
 
 ```bash
 # プロジェクトをクローン
-git clone https://github.com/QuantumNous/new-api.git
-cd new-api
+git clone https://github.com/shengjian-tech/allrouter.git
+cd allrouter
 
 # docker-compose.yml 設定を編集
 nano docker-compose.yml
@@ -290,11 +290,6 @@ docker run --name new-api -d --restart always \
 
 ---
 
-## 🚢 デプロイ
-
-> [!TIP]
-> **最新のDockerイメージ:** `calciumion/new-api:latest`
-
 ### 📋 デプロイ要件
 
 | コンポーネント | 要件 |
@@ -338,7 +333,7 @@ docker run --name new-api -d --restart always \
 
 ```bash
 # プロジェクトをクローン
-git clone https://github.com/QuantumNous/new-api.git
+git clone https://github.com/shengjian-tech/allrouter.git
 cd new-api
 
 # 設定を編集
@@ -411,6 +406,7 @@ docker run --name new-api -d --restart always \
 |------|------|
 | [One API](https://github.com/songquanpeng/one-api) | オリジナルプロジェクトベース |
 | [Midjourney-Proxy](https://github.com/novicezk/midjourney-proxy) | Midjourneyインターフェースサポート |
+| [New API](https://github.com/QuantumNous/new-api) | オリジナルプロジェクトベース |
 
 ### 補助ツール
 
@@ -451,21 +447,9 @@ docker run --name new-api -d --restart always \
 
 お客様の組織のポリシーがAGPLv3ライセンスのソフトウェアの使用を許可していない場合、またはAGPLv3のオープンソース義務を回避したい場合は、こちらまでお問い合わせください：[support@quantumnous.com](mailto:support@quantumnous.com)
 
----
-
-## 🌟 スター履歴
-
 <div align="center">
 
-[![スター履歴チャート](https://api.star-history.com/svg?repos=Calcium-Ion/new-api&type=Date)](https://star-history.com/#Calcium-Ion/new-api&Date)
-
-</div>
-
----
-
-<div align="center">
-
-### 💖 New APIをご利用いただきありがとうございます
+### 💖 All Routerをご利用いただきありがとうございます
 
 このプロジェクトがあなたのお役に立てたなら、ぜひ ⭐️ スターをください！
 

@@ -2,7 +2,7 @@
 
 ![new-api](/web/public/logo.png)
 
-# New API
+# All Router
 
 🍥 **新一代大模型網關與AI資產管理系統**
 
@@ -107,8 +107,8 @@
 
 ```bash
 # 複製項目
-git clone https://github.com/QuantumNous/new-api.git
-cd new-api
+git clone https://github.com/shengjian-tech/allrouter.git
+cd allrouter
 
 # 編輯 docker-compose.yml 配置
 nano docker-compose.yml
@@ -285,11 +285,6 @@ docker run --name new-api -d --restart always \
 
 ---
 
-## 🚢 部署
-
-> [!TIP]
-> **最新版 Docker 鏡像：** `calciumion/new-api:latest`
-
 ### 📋 部署要求
 
 | 組件 | 要求 |
@@ -333,7 +328,7 @@ docker run --name new-api -d --restart always \
 
 ```bash
 # 複製項目
-git clone https://github.com/QuantumNous/new-api.git
+git clone https://github.com/shengjian-tech/allrouter.git
 cd new-api
 
 # 編輯配置
@@ -408,6 +403,7 @@ docker run --name new-api -d --restart always \
 |------|------|
 | [One API](https://github.com/songquanpeng/one-api) | 原版項目基礎 |
 | [Midjourney-Proxy](https://github.com/novicezk/midjourney-proxy) | Midjourney 接口支援 |
+| [New API](https://github.com/QuantumNous/new-api) | 原版項目基礎 |
 
 ### 配套工具
 
@@ -448,21 +444,9 @@ docker run --name new-api -d --restart always \
 
 如果您所在的組織政策不允許使用 AGPLv3 許可的軟體，或您希望規避 AGPLv3 的開源義務，請發送郵件至：[support@quantumnous.com](mailto:support@quantumnous.com)
 
----
-
-## 🌟 Star History
-
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Calcium-Ion/new-api&type=Date)](https://star-history.com/#Calcium-Ion/new-api&Date)
-
-</div>
-
----
-
-<div align="center">
-
-### 💖 感謝使用 New API
+### 💖 感謝使用 All Router
 
 如果這個項目對你有幫助，歡迎給我們一個 ⭐️ Star！
 

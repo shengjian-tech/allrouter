@@ -2,7 +2,7 @@
 
 ![new-api](/web/public/logo.png)
 
-# New API
+# All Router
 
 🍥 **Next-Generation LLM Gateway and AI Asset Management System**
 
@@ -110,8 +110,8 @@
 
 ```bash
 # Clone the project
-git clone https://github.com/QuantumNous/new-api.git
-cd new-api
+git clone https://github.com/shengjian-tech/allrouter.git
+cd allrouter
 
 # Edit docker-compose.yml configuration
 nano docker-compose.yml
@@ -288,11 +288,6 @@ docker run --name new-api -d --restart always \
 
 ---
 
-## 🚢 Deployment
-
-> [!TIP]
-> **Latest Docker image:** `calciumion/new-api:latest`
-
 ### 📋 Deployment Requirements
 
 | Component | Requirement |
@@ -336,7 +331,7 @@ docker run --name new-api -d --restart always \
 
 ```bash
 # Clone the project
-git clone https://github.com/QuantumNous/new-api.git
+git clone https://github.com/shengjian-tech/allrouter.git
 cd new-api
 
 # Edit configuration
@@ -411,6 +406,7 @@ docker run --name new-api -d --restart always \
 |------|------|
 | [One API](https://github.com/songquanpeng/one-api) | Original project base |
 | [Midjourney-Proxy](https://github.com/novicezk/midjourney-proxy) | Midjourney interface support |
+| [New API](https://github.com/QuantumNous/new-api) | Original project base |
 
 ### Supporting Tools
 
@@ -451,21 +447,9 @@ This is an open-source project developed based on [One API](https://github.com/s
 
 If your organization's policies do not permit the use of AGPLv3-licensed software, or if you wish to avoid the open-source obligations of AGPLv3, please contact us at: [support@quantumnous.com](mailto:support@quantumnous.com)
 
----
-
-## 🌟 Star History
-
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Calcium-Ion/new-api&type=Date)](https://star-history.com/#Calcium-Ion/new-api&Date)
-
-</div>
-
----
-
-<div align="center">
-
-### 💖 Thank you for using New API
+### 💖 Thank you for using All Router
 
 If this project is helpful to you, welcome to give us a ⭐️ Star！
 
