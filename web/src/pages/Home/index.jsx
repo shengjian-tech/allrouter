@@ -17,7 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Button,
   Typography,
@@ -37,31 +37,11 @@ import {
   IconPlay,
   IconFile,
   IconCopy,
+  IconChevronRight,
 } from '@douyinfe/semi-icons';
 import { Link } from 'react-router-dom';
 import NoticeModal from '../../components/layout/NoticeModal';
-import {
-  Moonshot,
-  OpenAI,
-  XAI,
-  Zhipu,
-  Volcengine,
-  Cohere,
-  Claude,
-  Gemini,
-  Suno,
-  Minimax,
-  Wenxin,
-  Spark,
-  Qingyan,
-  DeepSeek,
-  Qwen,
-  Midjourney,
-  Grok,
-  AzureAI,
-  Hunyuan,
-  Xinference,
-} from '@lobehub/icons';
+import { OpenAI, Claude, Gemini, DeepSeek, Qwen, Grok } from '@lobehub/icons';
 
 const { Text } = Typography;
 
@@ -79,7 +59,8 @@ const Home = () => {
     statusState?.status?.server_address || `${window.location.origin}`;
   const endpointItems = API_ENDPOINTS.map((e) => ({ value: e }));
   const [endpointIndex, setEndpointIndex] = useState(0);
-  const isChinese = i18n.language.startsWith('zh');
+  const particlesCanvasRef = useRef(null);
+  const showDefaultHome = homePageContentLoaded && homePageContent === '';
 
   const displayHomePageContent = async () => {
     setHomePageContent(localStorage.getItem('home_page_content') || '');
@@ -105,7 +86,7 @@ const Home = () => {
       }
     } else {
       showError(message);
-      setHomePageContent('加载首页内容失败...');
+      setHomePageContent(t('加载首页内容失败...'));
     }
     setHomePageContentLoaded(true);
   };
@@ -148,192 +129,342 @@ const Home = () => {
     return () => clearInterval(timer);
   }, [endpointItems.length]);
 
+  useEffect(() => {
+    if (!showDefaultHome) {
+      return undefined;
+    }
+
+    const canvas = particlesCanvasRef.current;
+    if (!canvas) {
+      return undefined;
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      return undefined;
+    }
+
+    let animationFrameId;
+    let isAnimationActive = true;
+    let width = 0;
+    let height = 0;
+    let particles = [];
+
+    const buildParticle = () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: (Math.random() - 0.5) * 0.45,
+      size: Math.random() * 1.8 + 0.8,
+    });
+
+    const initParticles = () => {
+      const count = window.innerWidth < 768 ? 38 : 78;
+      particles = Array.from({ length: count }, buildParticle);
+    };
+
+    const resize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initParticles();
+    };
+
+    const animate = () => {
+      if (!isAnimationActive) {
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((particle, index) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0 || particle.x > width) {
+          particle.vx *= -1;
+        }
+        if (particle.y < 0 || particle.y > height) {
+          particle.vy *= -1;
+        }
+
+        ctx.fillStyle = 'rgba(0, 243, 255, 0.45)';
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = index + 1; j < particles.length; j += 1) {
+          const otherParticle = particles[j];
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 150) {
+            const opacity = Math.max(0, 0.12 - dist / 1500);
+            ctx.strokeStyle = `rgba(0, 243, 255, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.stroke();
+          }
+        }
+      });
+
+      if (isAnimationActive) {
+        animationFrameId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    resize();
+    animate();
+    window.addEventListener('resize', resize);
+
+    return () => {
+      isAnimationActive = false;
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+      particles = [];
+      window.removeEventListener('resize', resize);
+    };
+  }, [showDefaultHome]);
+
   return (
-    <div className='w-full overflow-x-hidden'>
+    <div className={showDefaultHome ? 'landing-home' : 'w-full overflow-x-hidden'}>
       <NoticeModal
         visible={noticeVisible}
         onClose={() => setNoticeVisible(false)}
         isMobile={isMobile}
       />
-      {homePageContentLoaded && homePageContent === '' ? (
-        <div className='w-full overflow-x-hidden'>
-          {/* Banner 部分 */}
-          <div className='w-full border-b border-semi-color-border min-h-[500px] md:min-h-[600px] lg:min-h-[700px] relative overflow-x-hidden'>
-            {/* 背景模糊晕染球 */}
-            <div className='blur-ball blur-ball-indigo' />
-            <div className='blur-ball blur-ball-teal' />
-            <div className='flex items-center justify-center h-full px-4 py-20 md:py-24 lg:py-32 mt-10'>
-              {/* 居中内容区 */}
-              <div className='flex flex-col items-center justify-center text-center max-w-4xl mx-auto'>
-                <div className='flex flex-col items-center justify-center mb-6 md:mb-8'>
-                  <h1
-                    className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-semi-color-text-0 leading-tight ${isChinese ? 'tracking-wide md:tracking-wider' : ''}`}
-                  >
-                    <>
-                      {t('统一的')}
-                      <br />
-                      <span className='shine-text'>{t('大模型接口网关')}</span>
-                    </>
-                  </h1>
-                  <p className='text-base md:text-lg lg:text-xl text-semi-color-text-1 mt-4 md:mt-6 max-w-xl'>
-                    {t('更好的价格，更好的稳定性，只需要将模型基址替换为：')}
-                  </p>
-                  {/* BASE URL 与端点选择 */}
-                  <div className='flex flex-col md:flex-row items-center justify-center gap-4 w-full mt-4 md:mt-6 max-w-md'>
-                    <Input
-                      readonly
-                      value={serverAddress}
-                      className='flex-1 !rounded-full'
-                      size={isMobile ? 'default' : 'large'}
-                      suffix={
-                        <div className='flex items-center gap-2'>
-                          <ScrollList
-                            bodyHeight={32}
-                            style={{ border: 'unset', boxShadow: 'unset' }}
-                          >
-                            <ScrollItem
-                              mode='wheel'
-                              cycled={true}
-                              list={endpointItems}
-                              selectedIndex={endpointIndex}
-                              onSelect={({ index }) => setEndpointIndex(index)}
-                            />
-                          </ScrollList>
-                          <Button
-                            type='primary'
-                            onClick={handleCopyBaseURL}
-                            icon={<IconCopy />}
-                            className='!rounded-full'
-                          />
-                        </div>
-                      }
-                    />
-                  </div>
-                </div>
+      {showDefaultHome ? (
+        <>
+          <div className='landing-bg-animation' aria-hidden='true'>
+            <div className='landing-orb landing-orb-primary' />
+            <div className='landing-orb landing-orb-secondary' />
+            <canvas
+              ref={particlesCanvasRef}
+              className='landing-particles-canvas'
+            />
+          </div>
 
-                {/* 操作按钮 */}
-                <div className='flex flex-row gap-4 justify-center items-center'>
-                  <Link to='/console'>
-                    <Button
-                      theme='solid'
-                      type='primary'
-                      size={isMobile ? 'default' : 'large'}
-                      className='!rounded-3xl px-8 py-2'
-                      icon={<IconPlay />}
-                    >
-                      {t('获取密钥')}
-                    </Button>
-                  </Link>
-                  {isDemoSiteMode && statusState?.status?.version ? (
-                    <Button
-                      size={isMobile ? 'default' : 'large'}
-                      className='flex items-center !rounded-3xl px-6 py-2'
-                      icon={<IconGithubLogo />}
-                      onClick={() =>
-                        window.open(
-                          'https://github.com/QuantumNous/new-api',
-                          '_blank',
-                        )
-                      }
-                    >
-                      {statusState.status.version}
-                    </Button>
-                  ) : (
-                    docsLink && (
-                      <Button
-                        size={isMobile ? 'default' : 'large'}
-                        className='flex items-center !rounded-3xl px-6 py-2'
-                        icon={<IconFile />}
-                        onClick={() => window.open(docsLink, '_blank')}
+          <nav className='landing-nav'>
+            <div className='landing-logo'>allrouter.ai</div>
+            <div className='landing-nav-actions'>
+              <Link to='/console' className='landing-nav-btn'>
+                {t('获取密钥')}
+              </Link>
+              {docsLink && (
+                <a
+                  href={docsLink}
+                  target='_blank'
+                  rel='noreferrer'
+                  className='landing-nav-btn'
+                >
+                  {t('文档')}
+                </a>
+              )}
+            </div>
+          </nav>
+
+          <main className='landing-main'>
+            <section className='landing-hero'>
+              <h1>
+                {t('智能路由,')}
+                <br />
+                <span>{t('由 AI 驱动')}</span>
+              </h1>
+              <p>
+                {t(
+                  '将您的网络从简单连接升级为智能、自优化的生态系统。立即体验连接的未来。',
+                )}
+              </p>
+
+              <div className='landing-endpoint-wrap'>
+                <Input
+                  readonly
+                  value={serverAddress}
+                  className='landing-endpoint-input'
+                  size={isMobile ? 'default' : 'large'}
+                  suffix={
+                    <div className='landing-endpoint-suffix'>
+                      <ScrollList
+                        bodyHeight={32}
+                        style={{ border: 'unset', boxShadow: 'unset' }}
                       >
-                        {t('文档')}
-                      </Button>
-                    )
-                  )}
-                </div>
+                        <ScrollItem
+                          mode='wheel'
+                          cycled={true}
+                          list={endpointItems}
+                          selectedIndex={endpointIndex}
+                          onSelect={({ index }) => setEndpointIndex(index)}
+                        />
+                      </ScrollList>
+                      <Button
+                        type='primary'
+                        onClick={handleCopyBaseURL}
+                        icon={<IconCopy />}
+                        className='landing-copy-btn'
+                      />
+                    </div>
+                  }
+                />
+              </div>
 
-                {/* 框架兼容性图标 */}
-                <div className='mt-12 md:mt-16 lg:mt-20 w-full'>
-                  <div className='flex items-center mb-6 md:mb-8 justify-center'>
-                    <Text
-                      type='tertiary'
-                      className='text-lg md:text-xl lg:text-2xl font-light'
+              <div className='landing-cta-group'>
+                <Link to='/console'>
+                  <Button
+                    theme='solid'
+                    type='primary'
+                    size={isMobile ? 'default' : 'large'}
+                    className='landing-btn-primary'
+                    icon={<IconPlay />}
+                  >
+                    {t('获取密钥')}
+                  </Button>
+                </Link>
+                {isDemoSiteMode && statusState?.status?.version ? (
+                  <Button
+                    size={isMobile ? 'default' : 'large'}
+                    className='landing-btn-secondary'
+                    icon={<IconGithubLogo />}
+                    onClick={() =>
+                      window.open('https://github.com/QuantumNous/new-api', '_blank')
+                    }
+                  >
+                    {statusState.status.version}
+                  </Button>
+                ) : (
+                  docsLink && (
+                    <Button
+                      size={isMobile ? 'default' : 'large'}
+                      className='landing-btn-secondary'
+                      icon={<IconFile />}
+                      onClick={() => window.open(docsLink, '_blank')}
                     >
-                      {t('支持众多的大模型供应商')}
-                    </Text>
+                      {t('文档')}
+                    </Button>
+                  )
+                )}
+              </div>
+            </section>
+
+            <section id='features' className='landing-features'>
+              <h2 className='landing-section-title'>
+                {t('为什么选择 AllRouter？')}
+              </h2>
+              <div className='landing-feature-grid'>
+                <article className='landing-feature-card'>
+                  <div className='icon-box'>
+                    <i className='fas fa-brain' />
                   </div>
-                  <div className='flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto px-4'>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Moonshot size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <OpenAI size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <XAI size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Zhipu.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Volcengine.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Cohere.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Claude.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Gemini.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Suno size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Minimax.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Wenxin.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Spark.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Qingyan.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <DeepSeek.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Qwen.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Midjourney size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Grok size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <AzureAI.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Hunyuan.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Xinference.Color size={40} />
-                    </div>
-                    <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center'>
-                      <Typography.Text className='!text-lg sm:!text-xl md:!text-2xl lg:!text-3xl font-bold'>
-                        30+
-                      </Typography.Text>
-                    </div>
+                  <h3>{t('AI 优化')}</h3>
+                  <p>
+                    {t('我们的机器学习算法实时分析流量模式，自动降低延迟并提升速度。')}
+                  </p>
+                </article>
+                <article className='landing-feature-card'>
+                  <div className='icon-box'>
+                    <i className='fas fa-shield-halved' />
+                  </div>
+                  <h3>{t('智能安全')}</h3>
+                  <p>
+                    {t(
+                      '先进的威胁检测可在恶意流量到达设备前进行拦截，全天候守护您的数据安全。',
+                    )}
+                  </p>
+                </article>
+                <article className='landing-feature-card'>
+                  <div className='icon-box'>
+                    <i className='fas fa-network-wired' />
+                  </div>
+                  <h3>{t('通用兼容')}</h3>
+                  <p>
+                    {t(
+                      '兼容所有主流路由器品牌，可在一个直观的控制台中管理整个家庭或办公网络。',
+                    )}
+                  </p>
+                </article>
+              </div>
+
+              <div className='landing-provider-row'>
+                <Text type='tertiary' className='landing-provider-title'>
+                  {t('支持众多的大模型供应商')}
+                </Text>
+                <div className='landing-provider-list'>
+                  <div className='landing-provider-item'>
+                    <OpenAI size={28} />
+                  </div>
+                  <div className='landing-provider-item'>
+                    <Claude.Color size={28} />
+                  </div>
+                  <div className='landing-provider-item'>
+                    <Gemini.Color size={28} />
+                  </div>
+                  <div className='landing-provider-item'>
+                    <DeepSeek.Color size={28} />
+                  </div>
+                  <div className='landing-provider-item'>
+                    <Qwen.Color size={28} />
+                  </div>
+                  <div className='landing-provider-item'>
+                    <Grok size={28} />
+                  </div>
+                  <div className='landing-provider-item landing-provider-more'>
+                    40+
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </section>
+
+            <section className='landing-related-section'>
+              <div className='landing-related-container'>
+                <div className='landing-related-header'>
+                  <h2>{t('探索更多')}</h2>
+                  <p>{t('快速访问定价、文档与控制台入口。')}</p>
+                </div>
+
+                <div className='landing-search-list'>
+                  <Link to='/pricing' className='landing-search-item'>
+                    <span className='landing-search-text'>{t('模型定价与对比')}</span>
+                    <IconChevronRight className='landing-search-arrow' />
+                  </Link>
+                  <Link to='/about' className='landing-search-item'>
+                    <span className='landing-search-text'>{t('关于平台')}</span>
+                    <IconChevronRight className='landing-search-arrow' />
+                  </Link>
+                  <Link to='/console' className='landing-search-item'>
+                    <span className='landing-search-text'>{t('进入控制台')}</span>
+                    <IconChevronRight className='landing-search-arrow' />
+                  </Link>
+                  {docsLink && (
+                    <a
+                      href={docsLink}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='landing-search-item'
+                    >
+                      <span className='landing-search-text'>{t('官方文档')}</span>
+                      <IconChevronRight className='landing-search-arrow' />
+                    </a>
+                  )}
+                 
+                </div>
+              </div>
+            </section>
+          </main>
+
+          <footer className='landing-footer'>
+            <p>
+              &copy; {new Date().getFullYear()} allrouter.ai. {t('版权所有')}
+            </p>
+          </footer>
+        </>
       ) : (
         <div className='overflow-x-hidden w-full'>
           {homePageContent.startsWith('https://') ? (
