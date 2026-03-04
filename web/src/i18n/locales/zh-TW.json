@@ -328,7 +328,7 @@
     "使用认证器应用（如 Google Authenticator、Microsoft Authenticator）扫描下方二维码：": "使用認證器應用（如 Google Authenticator、Microsoft Authenticator）掃描下方QR Code：",
     "使用认证器应用扫描二维码": "使用認證器應用掃描QR Code",
     "例如 €, £, Rp, ₩, ₹...": "例如 €, £, Rp, ₩, ₹...",
-    "例如 https://shengjian.net": "例如 https://shengjian.net",
+    "例如 https://allrouter.ai": "例如 https://allrouter.ai",
     "例如：": "例如：",
     "例如: /bin/bash -c \"python app.py\"": "例如: /bin/bash -c \"python app.py\"",
     "例如: nginx:latest": "例如: nginx:latest",

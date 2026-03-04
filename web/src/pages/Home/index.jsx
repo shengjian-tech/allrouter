@@ -95,9 +95,9 @@ const Home = () => {
   const docsLangPrefix = i18n.language.startsWith('zh') ? 'zh' : 'en';
 
   const docsHref =
-    docsLink || `https://shengjian.net/${docsLangPrefix}/docs`;
-  const apiReferenceHref = `https://shengjian.net/${docsLangPrefix}/docs/api`;
-  const communityHref = `https://shengjian.net/${docsLangPrefix}/docs/support/community-interaction`;
+    docsLink || `https://allrouter.ai/${docsLangPrefix}/docs`;
+  const apiReferenceHref = `https://allrouter.ai/${docsLangPrefix}/docs/api`;
+  const communityHref = `https://allrouter.ai/${docsLangPrefix}/docs/support/community-interaction`;
   const currentUser = userState?.user || getStoredUser();
   const isLoggedIn = Boolean(currentUser?.id);
   const isSelfUseMode = statusState?.status?.self_use_mode_enabled || false;
@@ -601,7 +601,7 @@ const Home = () => {
                 </li>
                 <li>
                   <a
-                    href='https://status.shengjian.net/'
+                    href='https://status.allrouter.ai/'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -636,7 +636,7 @@ const Home = () => {
                   </a>
                 </li>
                 <li>
-                  <a target='_blank' href='https://shengjian.net/en/index'>{t('联系我们')}</a>
+                  <a target='_blank' href='https://allrouter.ai/en/index'>{t('联系我们')}</a>
                 </li>
               </ul>
             </div>

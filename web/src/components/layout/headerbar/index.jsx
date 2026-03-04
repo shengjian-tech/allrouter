@@ -70,7 +70,7 @@ const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
   const { mainNavLinks } = useNavigation(t, docsLink, headerNavModules);
   const isPublicRoute = !isConsoleRoute;
   const docsLangPrefix = currentLang.startsWith('zh') ? 'zh' : 'en';
-  const docsHref = docsLink || `https://shengjian.net/${docsLangPrefix}/docs`;
+  const docsHref = docsLink || `https://allrouter.ai/${docsLangPrefix}/docs`;
   const isLoggedIn = Boolean(userState?.user);
   const consoleNavTarget = isLoggedIn ? '/console' : '/login';
   const pricingNavTarget =
