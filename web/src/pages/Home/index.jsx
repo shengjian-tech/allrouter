@@ -32,14 +32,14 @@ import LanguageSelector from '../../components/layout/headerbar/LanguageSelector
 import NotificationButton from '../../components/layout/headerbar/NotificationButton';
 import UserArea from '../../components/layout/headerbar/UserArea';
 
-import openaiLogo from '../../../new-index/logos/openai.svg';
-import anthropicLogo from '../../../new-index/logos/anthropic.svg';
-import googleLogo from '../../../new-index/logos/google.svg';
-import metaLogo from '../../../new-index/logos/meta.svg';
-import huggingFaceLogo from '../../../new-index/logos/huggingface.svg';
-import kimiLogo from '../../../new-index/logos/kimi.svg';
-import deepseekLogo from '../../../new-index/logos/deepseek.svg';
-import zhipuLogo from '../../../new-index/logos/zhipu.svg';
+import openaiLogo from '../../../public/logos/openai.svg';
+import anthropicLogo from '../../../public/logos/anthropic.svg';
+import googleLogo from '../../../public/logos/google.svg';
+import metaLogo from '../../../public/logos/meta.svg';
+import huggingFaceLogo from '../../../public/logos/huggingface.svg';
+import kimiLogo from '../../../public/logos/kimi.svg';
+import deepseekLogo from '../../../public/logos/deepseek.svg';
+import zhipuLogo from '../../../public/logos/zhipu.svg';
 
 const partnerLogos = [
   { src: openaiLogo, alt: 'OpenAI' },
