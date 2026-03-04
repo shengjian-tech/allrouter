@@ -539,7 +539,7 @@ const Home = () => {
             <div className='landing-v2-footer-brand'>
               <div className='landing-v2-logo landing-v2-logo-small'>
                 <img
-                  src='/logo.png'
+                  src={Logo}
                   alt='AllRouter.AI Logo'
                   className='landing-v2-real-logo'
                 />
