@@ -95,9 +95,9 @@ const Home = () => {
   const docsLangPrefix = i18n.language.startsWith('zh') ? 'zh' : 'en';
 
   const docsHref =
-    docsLink || `https://docs.newapi.pro/${docsLangPrefix}/docs`;
-  const apiReferenceHref = `https://docs.newapi.pro/${docsLangPrefix}/docs/api`;
-  const communityHref = `https://docs.newapi.pro/${docsLangPrefix}/docs/support/community-interaction`;
+    docsLink || `https://shengjian.net/${docsLangPrefix}/docs`;
+  const apiReferenceHref = `https://shengjian.net/${docsLangPrefix}/docs/api`;
+  const communityHref = `https://shengjian.net/${docsLangPrefix}/docs/support/community-interaction`;
   const currentUser = userState?.user || getStoredUser();
   const isLoggedIn = Boolean(currentUser?.id);
   const isSelfUseMode = statusState?.status?.self_use_mode_enabled || false;
@@ -563,7 +563,7 @@ const Home = () => {
                 </li>
                 <li>
                   <a
-                    href='https://github.com/QuantumNous/new-api/releases'
+                    href='https://github.com/shengjian-tech/allrouter/releases'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -601,7 +601,7 @@ const Home = () => {
                 </li>
                 <li>
                   <a
-                    href='https://status.newapi.pro/'
+                    href='https://status.shengjian.net/'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -619,7 +619,7 @@ const Home = () => {
                 </li>
                 <li>
                   <a
-                    href='https://github.com/QuantumNous/new-api'
+                    href='https://github.com/shengjian-tech/allrouter'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -628,7 +628,7 @@ const Home = () => {
                 </li>
                 <li>
                   <a
-                    href='https://github.com/QuantumNous/new-api/issues'
+                    href='https://github.com/shengjian-tech/allrouter/issues'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -636,7 +636,7 @@ const Home = () => {
                   </a>
                 </li>
                 <li>
-                  <a href='mailto:support@quantumnous.com'>{t('联系我们')}</a>
+                  <a target='_blank' href='https://shengjian.net/en/index'>{t('联系我们')}</a>
                 </li>
               </ul>
             </div>
