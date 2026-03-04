@@ -32,6 +32,8 @@ import LanguageSelector from '../../components/layout/headerbar/LanguageSelector
 import NotificationButton from '../../components/layout/headerbar/NotificationButton';
 import UserArea from '../../components/layout/headerbar/UserArea';
 
+import Logo from '../../../public/logo.png';
+
 import openaiLogo from '../../../public/logos/openai.svg';
 import anthropicLogo from '../../../public/logos/anthropic.svg';
 import googleLogo from '../../../public/logos/google.svg';
@@ -356,7 +358,7 @@ const Home = () => {
             className={`landing-v2-nav ${!isLoggedIn ? 'landing-v2-nav-fixed' : ''}`}
           >
             <div className='landing-v2-logo'>
-              <img src='/logo.png' alt='AllRouter.AI Logo' className='landing-v2-real-logo' />
+              <img src={Logo} alt='AllRouter.AI Logo' className='landing-v2-real-logo' />
               <span>AllRouter.AI</span>
             </div>
 
