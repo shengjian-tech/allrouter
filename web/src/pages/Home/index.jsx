@@ -428,6 +428,7 @@ const Home = () => {
                 <div className='landing-v2-hero-buttons'>
                   <Link
                     to='/console'
+                    target='_blank'
                     className='landing-v2-btn-primary landing-v2-btn-lg'
                   >
                     {t('免费开始构建')}
@@ -528,7 +529,7 @@ const Home = () => {
               <div className='landing-v2-cta-box'>
                 <h2>{t('准备好优化你的 AI 技术栈了吗？')}</h2>
                 <p>{t('加入成千上万开发者，以更低成本和更高速度构建 AI 应用。')}</p>
-                <Link to='/console' className='landing-v2-btn-primary landing-v2-btn-lg'>
+                <Link target='_blank' to='/console' className='landing-v2-btn-primary landing-v2-btn-lg'>
                   {t('获取免费 API 密钥')}
                 </Link>
               </div>
