@@ -152,6 +152,11 @@ Résultat attendu : le **Solde actuel** se met à jour en temps réel après pai
 
 ![](/docs_images/img_11.png)
 
+Une fois le paiement terminé, accédez à « Gestion du portefeuille » → « Facturation » pour consulter les enregistrements de facturation des recharges du compte.
+
+![](/docs_images/img_24_9.png)
+
+
 ### Paramètres personnels
 
 Description : liaison de compte, sécurité, alertes de quota et préférences d'interface.

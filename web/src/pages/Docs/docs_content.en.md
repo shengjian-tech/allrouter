@@ -152,6 +152,11 @@ Expected result: After payment succeeds, **Current Balance** updates in real tim
 
 ![](/docs_images/img_11.png)
 
+After the payment is completed, go to “Wallet Management” → “Billing” to view the account's recharge billing records.
+
+![](/docs_images/img_24_9.png)
+
+
 ### Personal Settings
 
 Feature description: Account binding, security settings, quota alerts, and UI preferences.

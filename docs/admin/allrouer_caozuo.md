@@ -118,7 +118,33 @@
 
 ![image-20260305155256925](image-20260305155256925.png)
 
+#### 3.3.1 需要将web服务伪装成claude code（可选）
 
+1.管理员登录到控制台->渠道管理
+
+![](screenshot-20260311-144654.png)
+
+2.进入到渠道管理中点击添加渠道后弹出框中基本信息中类型选择 Anthropic Claude，填写api密钥，api地址(只需要填写https:域名无需填写/v1/messages后端会自己处理)选择相应的模型或填写自定义模型。
+
+![](screenshot-20260311-144958.png)
+
+![](screenshot-20260311-144917.png)
+
+3.在高级设置中找到请求头覆盖，填写：
+
+```json
+{
+  "x-api-key": "{api_key}",
+  "User-Agent": "claude-cli/2.1.51 (external, cli)",
+  "x-app": "cli"
+}
+```
+
+![](20260311-145358.png)
+
+4.找到渠道额外设置，Claude 强制 beta=true打开，即可将web服务伪装成claude code
+
+![](screenshot-20260311-145543.png)
 
 ## 4,运营设置
 
