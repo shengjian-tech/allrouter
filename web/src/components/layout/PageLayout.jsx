@@ -69,6 +69,8 @@ const PageLayout = () => {
         location.pathname !== '/console/playground';
 
     const isConsoleRoute = location.pathname.startsWith('/console');
+    const isDocsRoute =
+        location.pathname === '/docs' || location.pathname.startsWith('/docs/');
     const showSider = isConsoleRoute && (!isMobile || drawerOpen);
     const shouldShowHeader = location.pathname !== '/';
 
@@ -190,7 +192,7 @@ const PageLayout = () => {
                     <Content
                         style={{
                             flex: '1 0 auto',
-                            overflowY: isMobile ? 'visible' : 'hidden',
+                            overflowY: isMobile || isDocsRoute ? 'visible' : 'hidden',
                             WebkitOverflowScrolling: 'touch',
                             padding: shouldInnerPadding ? (isMobile ? '5px' : '24px') : '0',
                             position: 'relative',

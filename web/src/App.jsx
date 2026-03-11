@@ -55,6 +55,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const About = lazy(() => import('./pages/About'));
 const UserAgreement = lazy(() => import('./pages/UserAgreement'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Docs = lazy(() => import('./pages/Docs'));
 
 function DynamicOAuth2Callback() {
   const { provider } = useParams();
@@ -90,6 +91,14 @@ function App() {
   return (
     <SetupCheck>
       <Routes>
+        <Route
+          path='/docs'
+          element={
+            <Suspense fallback={<Loading></Loading>} key={location.pathname}>
+              <Docs />
+            </Suspense>
+          }
+        />
         <Route
           path='/'
           element={

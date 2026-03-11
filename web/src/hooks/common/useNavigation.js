@@ -51,13 +51,15 @@ export const useNavigation = (t, docsLink, headerNavModules) => {
       },
       ...(docsLink
         ? [
-            {
-              text: t('文档'),
-              itemKey: 'docs',
-              isExternal: true,
-              externalLink: docsLink,
-            },
-          ]
+          {
+            text: t('文档'),
+            itemKey: 'docs',
+            isExternal: docsLink.startsWith('http://') || docsLink.startsWith('https://'),
+            ...(docsLink.startsWith('http://') || docsLink.startsWith('https://')
+              ? { externalLink: docsLink }
+              : { to: docsLink.startsWith('/') ? docsLink : `/${docsLink}` }),
+          },
+        ]
         : []),
       {
         text: t('关于'),
